@@ -19,6 +19,13 @@ public class Fornecedor {
     @Size(max = 200)
     private String razaoSocial;
 
+    public Fornecedor(String razaoSocial) {
+        this.razaoSocial = razaoSocial;
+    }
+
+    public Fornecedor() {
+    }
+
     public Long getId() {
         return id;
     }

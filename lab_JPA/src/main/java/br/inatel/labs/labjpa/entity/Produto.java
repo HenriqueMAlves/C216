@@ -19,6 +19,13 @@ public class Produto {
     @Size(max = 100)
     private String descricao;
 
+    public Produto(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public Produto() {
+    }
+
     public Long getId() {
         return id;
     }
