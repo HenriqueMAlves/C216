@@ -12,6 +12,9 @@ public class Fornecedor {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@OneToOne
+	private Endereco endereco;
 	@ManyToMany
 	private List<Produto> listaProduto;
 	@NotNull
