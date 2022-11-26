@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
-@SpringBootTest
+//@SpringBootTest
 class DataLoader {
 	@Autowired
 	private ProdutoService produtoService;
@@ -24,7 +24,7 @@ class DataLoader {
 	@Autowired
 	private NotaCompraService notaCompraService;
 
-	@Test
+	//@Test
 	void load() {
 		Produto p1 = new Produto("Furadeira");
 		Produto p2 = new Produto("Lixadeira");
