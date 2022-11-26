@@ -60,4 +60,9 @@ public class CursoController {
             servico.removerCurso(cursoASerRemovido);
         }
     }
+
+    @GetMapping("/pesquisa")
+    public List<Curso> listarPeloFragDescricao(@RequestParam("descricao") String fragDescricao){
+        return servico.pesquisarCursoPeloFragDescricao(fragDescricao);
+    }
 }

@@ -4,10 +4,8 @@ import br.inatel.labs.labrest.server.model.Curso;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class CursoService {
@@ -56,5 +54,17 @@ public class CursoService {
 
     public void removerCurso(Curso cursoASerRemovido){
         listaDeCursos.remove(cursoASerRemovido);
+    }
+
+    public List<Curso> pesquisarCursoPeloFragDescricao(String fragDescricao){
+        if(Objects.isNull(fragDescricao) || fragDescricao.isBlank()){
+            return List.of();
+        }
+
+        List<Curso> listaDeCursosEncintrados = this.listaDeCursos.stream()
+                .filter(c -> c.getDescricao().trim().toLowerCase()
+                .contains( fragDescricao.trim().toLowerCase())).collect(Collectors.toList());
+
+        return listaDeCursosEncintrados;
     }
 }
