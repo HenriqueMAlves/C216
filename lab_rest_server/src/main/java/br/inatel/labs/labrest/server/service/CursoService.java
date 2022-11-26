@@ -7,6 +7,7 @@ import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 public class CursoService {
@@ -30,5 +31,30 @@ public class CursoService {
     public Optional<Curso> buscarCursoPeloId(Long cursoId){
         Optional<Curso> opCurso = listaDeCursos.stream().filter(c -> c.getId().equals(cursoId)).findFirst();
         return opCurso;
+    }
+
+    public Curso criarCurso(Curso curso){
+        Long id = new Random().nextLong();
+        curso.setId(id);
+        listaDeCursos.add(curso);
+        return curso;
+    }
+
+    public void atualizaCurso(Curso curso){
+        listaDeCursos.remove(curso);
+        listaDeCursos.add(curso);
+    }
+
+    public void removerCursoPeloId(Long cursoId){
+        Optional<Curso> opCurso = buscarCursoPeloId(cursoId);
+
+        if(opCurso.isPresent()){
+            Curso cursoARemover = opCurso.get();
+            listaDeCursos.remove(cursoARemover);
+        }
+    }
+
+    public void removerCurso(Curso cursoASerRemovido){
+        listaDeCursos.remove(cursoASerRemovido);
     }
 }
