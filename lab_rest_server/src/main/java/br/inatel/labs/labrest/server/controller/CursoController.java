@@ -4,10 +4,12 @@ import br.inatel.labs.labrest.server.model.Curso;
 import br.inatel.labs.labrest.server.service.CursoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/curso")
@@ -19,5 +21,11 @@ public class CursoController {
     public List<Curso> listar(){
         List<Curso> listaCurso = servico.pequisarCurso();
         return listaCurso;
+    }
+
+    @GetMapping("/{id}")
+    public Curso buscar(@PathVariable("id") Long cursoId){
+        Optional<Curso> opCurso = servico.buscarCursoPeloId(cursoId);
+        return opCurso.get();
     }
 }
