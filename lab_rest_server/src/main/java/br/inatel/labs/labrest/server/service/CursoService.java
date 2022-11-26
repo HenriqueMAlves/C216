@@ -38,7 +38,7 @@ public class CursoService {
         return curso;
     }
 
-    public void atualizaCurso(Curso curso){
+    public void atualizarCurso(Curso curso){
         listaDeCursos.remove(curso);
         listaDeCursos.add(curso);
     }

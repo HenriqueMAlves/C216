@@ -1,5 +1,6 @@
 package br.inatel.labs.labrest.server.controller;
 
+import br.inatel.labs.labrest.server.exception.CursoNaoEncontradoException;
 import br.inatel.labs.labrest.server.model.Curso;
 import br.inatel.labs.labrest.server.service.CursoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +30,7 @@ public class CursoController {
         if(opCurso.isPresent()){
             return opCurso.get();
         } else {
-            String message = String.format("Nenum curso encontrado com o id [%s]", cursoId);
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, message);
+            throw new CursoNaoEncontradoException(cursoId);
         }
     }
 
@@ -43,8 +43,13 @@ public class CursoController {
 
     @PutMapping
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void atualizar(@RequestBody Curso curso){
-        servico.atualizaCurso(curso);
+    public void atualizar(@RequestBody Curso curso) {
+        Optional<Curso> opCurso = servico.buscarCursoPeloId(curso.getId());
+        if (opCurso.isPresent()) {
+            servico.atualizarCurso(curso);
+        } else {
+            throw new CursoNaoEncontradoException(curso.getId());
+        }
     }
 
     @DeleteMapping("/{id}")
@@ -53,8 +58,7 @@ public class CursoController {
         Optional<Curso> opCurso = servico.buscarCursoPeloId(cursoIdParaRemover);
 
         if(opCurso.isEmpty()){
-            String message = String.format("Nenum curso encontrado com o id [%s]", cursoIdParaRemover);
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, message);
+            throw new CursoNaoEncontradoException(cursoIdParaRemover);
         } else {
             Curso cursoASerRemovido = opCurso.get();
             servico.removerCurso(cursoASerRemovido);
