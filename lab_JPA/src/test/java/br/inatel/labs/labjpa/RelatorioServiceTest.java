@@ -11,13 +11,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import br.inatel.labs.labjpa.dto.TotalCompradoPorFornecedorDTO;
 import br.inatel.labs.labjpa.service.RelatorioService;
 
-@SpringBootTest
+//@SpringBootTest
 class RelatorioServiceTest {
 
 	@Autowired
 	private RelatorioService service;
 
-	@Test
+	//@Test
 	void test() {
 		List<TotalCompradoPorFornecedorDTO> listaDTO = service.pesquisarTotalCompradoPorFornecedor();
 
